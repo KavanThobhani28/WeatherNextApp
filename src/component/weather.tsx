@@ -17,9 +17,17 @@ const Weather = () => {
   const [weatherdata, setWeatherdata] = useState<WeatherData | null | undefined>(null)
   const apiKey = '9ac7a9bffcc623a2e687eb84a6acfd83'
 
+  /**
+   * Temp Toggle handler
+   */
   const handleTempToggle = () => {
     setIsFahrenheit((prevIsFahrenheit) => !prevIsFahrenheit)
   }
+
+  /**
+   * Input text handler
+   * @param event
+   */
   // eslint-disable-next-line padding-line-between-statements
   const handleCityBlur = (event) => {
     setSearchedCity(event.target.value)
@@ -30,6 +38,10 @@ const Weather = () => {
   useEffect(() => {
     weatherApi(lattitude, lon)
   }, [isFahrenheit])
+
+  /**
+   * Api call to find lat and lon of the searched city
+   */
   const latLongApi = async () => {
     try {
       const latLongApi = await axios.get(
@@ -43,6 +55,12 @@ const Weather = () => {
       console.log(error)
     }
   }
+
+  /**
+   * Api call to find the weather detials of the city of perticular lat and lon
+   * @param lat
+   * @param long
+   */
   const weatherApi = async (lat, long) => {
     try {
       const weatherApi = await axios.get(
@@ -51,6 +69,10 @@ const Weather = () => {
       setWeatherdata(weatherApi.data)
     } catch (error) {}
   }
+
+  /**
+   * On click search handler
+   */
   const handleCitySearch = () => {
     latLongApi()
   }
