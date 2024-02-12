@@ -15,6 +15,10 @@ const WeeklyWeather = ({ weatherData, isFahrenheit }: Props) => {
       {weatherData &&
         weatherData.length > 0 &&
         weatherData.map((data, index) => {
+          if (index === 0) {
+            return null // Skip rendering the first index
+          }
+
           const dateString = moment.unix(data?.dt)
           const dayString = formatUnixTimestamp(data?.dt, 'dddd')
 
@@ -32,23 +36,21 @@ const WeeklyWeather = ({ weatherData, isFahrenheit }: Props) => {
 
           const weatherIcon = weatherIcons[data.weather[0]?.id] || 'sunny'
           return (
-            <>
-              <div className='weekly-weather-card'>
-                <div className='week-day'>{dayString}</div>
-                <div className='icon'>
-                  <Icon name={weatherIcon} />
-                </div>
-                <div className='temperature'>
-                  {' '}
-                  {timeOfDay === 'Morning'
-                    ? data.temp.morn.toFixed(0)
-                    : timeOfDay === 'Afternoon/Evening'
-                      ? data.temp.eve.toFixed(0)
-                      : data.temp.night.toFixed(0)}
-                  {isFahrenheit ? '°F' : '°C'}
-                </div>
+            <div className='weekly-weather-card' key={index}>
+              <div className='week-day'>{dayString}</div>
+              <div className='icon'>
+                <Icon name={weatherIcon} />
               </div>
-            </>
+              <div className='temperature'>
+                {' '}
+                {timeOfDay === 'Morning'
+                  ? data.temp.morn.toFixed(0)
+                  : timeOfDay === 'Afternoon/Evening'
+                    ? data.temp.eve.toFixed(0)
+                    : data.temp.night.toFixed(0)}
+                {isFahrenheit ? '°F' : '°C'}
+              </div>
+            </div>
           )
         })}
     </div>

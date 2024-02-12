@@ -13,8 +13,6 @@ const LeftCard = ({ weatherData, isFahrenheit }: Props) => {
   const sunriseTime = formatUnixTimestamp(weatherData?.sunrise, 'hh:mm A')
   const sunsetTime = formatUnixTimestamp(weatherData?.sunset, 'hh:mm A')
   const dayString = formatUnixTimestamp(weatherData?.dt, 'dddd')
-  const timeString = dateString.format('hh:mm A')
-
   const weatherIcon = weatherIcons[weatherData?.weather[0]?.id] || 'sunny'
   const temperature = isFahrenheit ? `${weatherData?.temp}°F` : `${weatherData?.temp}°C`
   return (
@@ -22,7 +20,6 @@ const LeftCard = ({ weatherData, isFahrenheit }: Props) => {
       <div className='card'>
         <div className='card-header space-between'>
           <span>{dayString}</span>
-          <span>{timeString}</span>
         </div>
         <div className='card-body'>
           <div className='align-items-end'>
@@ -31,15 +28,9 @@ const LeftCard = ({ weatherData, isFahrenheit }: Props) => {
                 <span></span>
                 <Icon name={weatherIcon} />
               </div>
-              <span>{titleCase(weatherData?.weather[0]?.description)}</span>
-            </div>
-            <div className='cloudy-icon'>
-              <svg width='63' height='43' viewBox='0 0 63 43' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <circle cx='11.9201' cy='30.9127' r='11.2638' fill='#D9D9D9' />
-                <circle cx='51.7362' cy='30.9127' r='11.2638' fill='#D9D9D9' />
-                <circle cx='31.5663' cy='17.2914' r='17.2886' fill='#D9D9D9' />
-                <path d='M51.6053 42.1765H12.0511L26.7202 23.5782L38.6388 19.6489H51.6053V42.1765Z' fill='#D9D9D9' />
-              </svg>
+              <div>
+                <span>{titleCase(weatherData?.weather[0]?.description)}</span>
+              </div>
             </div>
           </div>
           <div className='temperature-section space-between'>
@@ -61,22 +52,22 @@ const LeftCard = ({ weatherData, isFahrenheit }: Props) => {
             </div>
           </div>
           <div className='inner-card'>
-            <div className='align-items-center'>
+            <div className='align-items-center justify-space-between'>
               <div className='icon'>
                 <Icon name='left_card_sunrise' />
               </div>
               <span>Sunrise</span>
+              <div className='time-section'>{sunriseTime}</div>
             </div>
-            <div className='time-section'>{sunriseTime}</div>
           </div>
           <div className='inner-card'>
-            <div className='align-items-center'>
+            <div className='align-items-center justify-space-between'>
               <div className='icon'>
                 <Icon name='left_card_sunset' />
               </div>
               <span>Sunset</span>
+              <div className='time-section'>{sunsetTime}</div>
             </div>
-            <div className='time-section'>{sunsetTime}</div>
           </div>
         </div>
       </div>

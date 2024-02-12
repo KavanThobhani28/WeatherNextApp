@@ -107,6 +107,9 @@ a {
   display: flex;
   align-items: center;
 }
+.justify-space-between {
+  justify-content: space-between;
+}
 .p-32 {
   padding: 2rem;
 }
@@ -365,7 +368,7 @@ a {
             color: #fff;
           }
           .icon-section {
-            margin: 1.4375rem 0rem;
+            margin: 0.5rem 0rem;
             span {
               display: flex;
               justify-content: center;

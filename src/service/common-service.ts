@@ -34,7 +34,7 @@ export const weatherIcons = {
     802: 'cloudy',
     803: 'cloudy',
     804: 'cloudy',
-    800: 'clear',
+    800: 'sunny',
     600: 'rain',
     601: 'rain',
     602: 'rain',
